@@ -1,0 +1,74 @@
+//
+// Bierkarte template layout
+//
+
+$bierkarte-list-width-medium: rem-calc(380);
+$bierkarte-list-width-large: rem-calc(540);
+
+.t-bierkarte {
+  border: 1px solid palette(ui, 'alto');
+  position: relative;
+  overflow: hidden;
+  max-width: rem-calc(1600);
+  margin: 0 auto;
+
+  @include breakpoint(large) {
+    @include flex;
+    @include flex-align(left, top);
+  }
+}
+
+
+
+
+
+
+
+
+/** ***********
+ * Map container
+ */
+.t-bierkarte__map {
+  @include breakpoint(large) {
+    flex-grow: 1;
+    height: rem-calc(300);
+  }
+
+  @include breakpoint(large) {
+    height: auto;
+    margin-right: $bierkarte-list-width-medium;
+  }
+
+  @include breakpoint(xlarge) {
+    margin-right: $bierkarte-list-width-large;
+  }
+}
+
+
+
+
+
+
+
+
+
+/** ***********
+ * List container
+ */
+.t-bierkarte__list {
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+
+  // height: 50vh;
+  // overflow: hidden;
+
+  @include breakpoint(large) {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    width: $bierkarte-list-width-medium;
+  }
+
+  @include breakpoint(xlarge) {
+    width: $bierkarte-list-width-large;
+  }
+}
