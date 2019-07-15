@@ -1,0 +1,87 @@
+{#
+ # Beer menu
+ # ------------
+ #}
+{% import macros as helper %}
+
+{% extends "_layout" %}
+
+{# Set title #}
+{% set title = entry.title %}
+
+{# Inline CSS #}
+{% block _inline_css %}
+  <style>
+    {{ source ('assets/css/sections/bierkarte/index_critical.min.css', ignore_missing = true) }}
+  </style>
+{% endblock %}
+
+{# Footer scripts #}
+{% block footer %}
+<script async src="{{ siteUrl }}assets/js/vendor/mapbox-gl.js"></script>
+{% endblock %}
+
+{# Content #}
+{% block content %}
+
+
+  {# Title #}
+  {{helper.include('module', 'catintro', {
+    entry: entry,
+    modifier: 'm-catintro--longtext',
+    hideIcon: true,
+    macros: macros
+  })}}
+
+
+  <div class="t-bierkarte">
+    <div class="t-bierkarte__map">
+      <div id="map" class="m-map" data-map></div>
+    </div>
+    <div class="t-bierkarte__list">
+      <ul class="o-maplist" id="listings" data-map-list></ul>
+      <div class="c-spinner" data-loader></div>
+    </div>
+  </div>
+
+
+  <script id="tmpl_map_list" type="x-tmpl-mustache/javascript">
+    <li id="{% verbatim %}{{id}}{% endverbatim %}" class="m-mapitem">
+      <div class="m-mapitem__link" data-position="{% verbatim %}{{linkPosition}}{% endverbatim %}">
+        <h3 class="m-mapitem__title">{% verbatim %}{{title}}{% endverbatim %}</h3>
+        <div class="m-mapitem__meta">{% verbatim %}{{address}}{% endverbatim %}</div>
+        <div class="m-mapitem__icon" title="{% verbatim %}{{iconTitle}}{% endverbatim %}">
+          <svg class="c-icon"><use xlink:href="#svg_icon-venue-{% verbatim %}{{icon}}{% endverbatim %}"></use></svg>
+        </div>
+
+        {% verbatim %}{{#beersTap}}{% endverbatim %}
+        <div class="m-mapitem__content" title="Biere vom Fass">
+          <svg class="c-icon"><use xlink:href="#svg_icon-taps"></use></svg>
+          {% verbatim %}{{beersTap}}{% endverbatim %}
+        </div>
+        {% verbatim %}{{/beersTap}}{% endverbatim %}
+
+        {% verbatim %}{{#beersBottle}}{% endverbatim %}
+        <div class="m-mapitem__content" title="Flaschenbiere">
+          <svg class="c-icon"><use xlink:href="#svg_icon-bottles"></use></svg>
+          {% verbatim %}{{beersBottle}}{% endverbatim %}
+        </div>
+        {% verbatim %}{{/beersBottle}}{% endverbatim %}
+
+        <ul class="m-mapitem__footer">
+          <li>
+            <a href="{% verbatim %}{{googleAddress}}{% endverbatim %}" {{helper.targetBlank}} title="Location auf Google Maps anschauen">Google Maps</a>
+          </li>
+
+          {% verbatim %}{{#websiteUrl}}{% endverbatim %}
+            <li><a href="{% verbatim %}{{websiteUrl}}{% endverbatim %}" {{helper.targetBlank}} title="Website besuchen">{% verbatim %}{{websiteNiceUrl}}{% endverbatim %}</a></li>
+          {% verbatim %}{{/websiteUrl}}{% endverbatim %}
+        </ul>
+      </div>
+    </li>
+  </script>
+
+
+
+
+{% endblock %}

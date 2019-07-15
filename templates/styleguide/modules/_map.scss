@@ -1,0 +1,86 @@
+.m-map {
+  background-color: #eee;
+  // display: none;
+  height: rem-calc(300);
+  height: 50vh;
+
+  @include breakpoint(large) {
+    display: block;
+    height: 70vh;
+  }
+}
+
+
+
+$marker-size: rem-calc(28);
+
+.m-marker {
+  background-color: palette(brand, 'gurka');
+  border: 3px solid palette(ui, 'white');
+  box-shadow: 0 2px 7px rgba(0, 0, 0, .3);
+  width: $marker-size;
+  height: $marker-size;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: .7;
+  transition: opacity .15s ease-in-out, background-color .15s ease-in-out;
+
+  &:hover {
+    background-color: $global-accent-color;
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+.m-marker--active {
+  background-color: $global-accent-color;
+  opacity: 1;
+  z-index: 1;
+}
+
+
+
+
+
+.mapboxgl-popup {
+  width: rem-calc(264);
+}
+
+.mapboxgl-popup-content {
+  @include u-baseline(2, padding);
+  box-shadow: 0 4px 11px rgba(0, 0, 0, .2);
+
+  h3 {
+    margin-top: 0;
+  }
+}
+
+.mapboxgl-popup-close-button {
+  @include font($font-base-m);
+  color: palette(ui, 'tundora');
+  // display: none;
+}
+
+
+
+
+
+
+.m-marker__heading {
+  @include font($font-base-m);
+  margin: 0;
+}
+
+.fonts--loaded .m-marker__heading {
+  @include font-replace(display);
+}
+
+
+
+
+.m-marker__meta {
+  @include font($font-options-xxs-secondary);
+  @include u-baseline(2, margin-bottom);
+  color: palette(ui, 'tundora');
+  font-style: italic;
+}
